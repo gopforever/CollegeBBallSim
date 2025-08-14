@@ -1,0 +1,32 @@
+*{box-sizing:border-box}body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:#0f1320;color:#e8ebff}
+header{display:flex;align-items:center;justify-content:space-between;padding:16px 20px;background:#151933;border-bottom:1px solid #252a48;position:sticky;top:0;z-index:10}
+h1{margin:0;font-size:20px;letter-spacing:.3px}
+.controls button{margin-right:8px}
+main{display:grid;grid-template-columns:280px 1fr;gap:16px;min-height:calc(100vh - 64px)}
+aside{padding:16px;border-right:1px solid #252a48;background:#12162a}
+aside h2{margin:8px 0 6px 0;font-size:14px;color:#8ea2ff;text-transform:uppercase;letter-spacing:.8px}
+.panel{border:1px solid #252a48;background:#0f1320;border-radius:14px;padding:12px;margin-bottom:12px}
+.panel label{display:block;font-size:12px;margin-top:8px;margin-bottom:4px;color:#b8c2ff}
+.panel input,.panel select{width:100%;padding:8px;border-radius:10px;border:1px solid #2c3256;background:#0b0e1b;color:#f2f3ff}
+.panel button{width:100%;margin-top:10px}
+#content{padding:16px}
+.view{display:none}
+.view.active{display:block}
+button{background:#2a5bff;border:none;color:white;padding:10px 12px;border-radius:10px;cursor:pointer}
+button:hover{filter:brightness(1.1)}
+table{width:100%;border-collapse:collapse;margin-top:8px}
+th,td{border-bottom:1px solid #252a48;padding:8px;text-align:left}
+tbody tr:hover{background:#0b0f21}
+.badge{display:inline-block;padding:2px 8px;border:1px solid #2a5bff;border-radius:999px;font-size:11px;color:#b7c6ff}
+.grid{display:grid;gap:12px}
+.grid.cols-2{grid-template-columns:1fr 1fr}
+.grid.cols-4{grid-template-columns:repeat(4,1fr)}
+.card{border:1px solid #252a48;background:#0f1320;border-radius:14px;padding:12px}
+footer{border-top:1px solid #252a48;background:#151933;padding:10px 16px;text-align:center}
+.region{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+.bracket{display:grid;grid-template-columns:repeat(6,1fr);gap:12px;align-items:start}
+.round{border:1px solid #252a48;border-radius:12px;padding:10px}
+.round h3{margin-top:0;font-size:14px;color:#8ea2ff}
+.game{display:flex;justify-content:space-between;padding:6px;border-bottom:1px dashed #252a48}
+.game:last-child{border-bottom:none}
+.mono{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace}

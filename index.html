@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>College Basketball GM (MVP)</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header>
+    <h1>College Basketball GM — MVP</h1>
+    <div class="controls">
+      <button id="newGameBtn">New Universe</button>
+      <button id="importBtn">Import Save</button>
+      <button id="exportBtn">Export Save</button>
+      <button id="loadTeamsBtn">Reload Teams</button><button id="wikiLoadBtn">Load D-I (Wikipedia)</button>
+    </div>
+  </header>
+
+  <main>
+    <aside>
+      <h2>Season Controls</h2>
+      <div class="panel">
+        <label>Seed (optional)</label>
+        <input id="seedInput" type="text" placeholder="e.g., 2025" />
+        <label>Non-Conf Games</label>
+        <input id="nonConfInput" type="number" min="0" max="20" value="8" />
+        <label>Conf Round Robin</label>
+        <select id="rrMode">
+          <option value="single" selected>Single</option>
+          <option value="double">Double</option>
+        </select>
+        <button id="genScheduleBtn">Generate Schedule</button>
+        <button id="simRegularBtn">Sim Regular Season</button>
+        <button id="simTournamentsBtn">Sim Conf Tournaments</button>
+        <button id="buildBracketBtn">Build Bracket</button>
+        <button id="simBracketBtn">Sim National Tournament</button>
+      </div>
+
+      <h2>Views</h2>
+      <div class="panel">
+        <button data-view="teams">Teams</button>
+        <button data-view="standings">Standings</button>
+        <button data-view="schedule">Schedule</button>
+        <button data-view="tournaments">Conf Tournaments</button>
+        <button data-view="bracket">National Bracket</button>
+      </div>
+    </aside>
+
+    <section id="content">
+      <div id="help">
+        <p><strong>Welcome!</strong> This MVP simulates a full D-I style season using real team names from <code>data/teams.csv</code> (you can replace that file with a complete list). It creates conference schedules, non-conf games, conference tournaments, and a national bracket sized to your universe (8/16/32/64).</p>
+        <p>Everything auto-saves to your browser. Use <em>Export Save</em> before clearing your cache or moving devices.</p>
+        <p><em>Note:</em> Real team names are trademarks of their respective schools/conferences. This tool is for educational/fan use and is not affiliated with the NCAA or any institution.</p>
+      </div>
+
+      <div id="view-teams" class="view"></div>
+      <div id="view-standings" class="view"></div>
+      <div id="view-schedule" class="view"></div>
+      <div id="view-tournaments" class="view"></div>
+      <div id="view-bracket" class="view"></div>
+    </section>
+  </main>
+
+  <footer>
+    <small>College Basketball GM — quickstart MVP. Built for static hosting (Netlify) with LocalStorage saves.</small>
+  </footer>
+
+  <input id="fileInput" type="file" accept="application/json" style="display:none" />
+  <script src="app.js"></script>
+</body>
+</html>
