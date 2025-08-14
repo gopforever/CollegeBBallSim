@@ -755,3 +755,62 @@ document.getElementById("wikiLoadBtn").addEventListener("click", async () => {
     alert("Wikipedia load failed. You can still use data/teams.csv or try again.");
   }
 });
+
+
+// ---------- Static CSV Mode & Exporter ----------
+function isStaticCsvMode(){
+  const el = document.getElementById("staticCsvMode");
+  return el && el.checked;
+}
+if (document.getElementById("staticCsvMode")) {
+  document.getElementById("staticCsvMode").addEventListener("change", ()=>{
+    localStorage.setItem("cbbgm_static_csv_mode", isStaticCsvMode() ? "1" : "0");
+  });
+  const savedFlag = localStorage.getItem("cbbgm_static_csv_mode");
+  if (savedFlag === "1") document.getElementById("staticCsvMode").checked = true;
+}
+
+async function exportTeamsCSV(teams) {
+  // teams: array of {school,nickname,conf,rating}
+  const header = "School,Nickname,Conference,Rating";
+  const lines = teams.map(t => {
+    const esc = (s)=> `"${String(s).replace(/"/g,'""')}"`;
+    return [esc(t.school), esc(t.nickname||""), esc(t.conf), t.rating].join(",");
+  });
+  const csv = [header, ...lines].join("\n");
+  const blob = new Blob([csv], {type:"text/csv"});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url; a.download = "teams.csv";
+  document.body.appendChild(a); a.click(); a.remove();
+  URL.revokeObjectURL(url);
+}
+
+// Replace buildOrLoad to honor Static CSV Mode on first boot
+const _buildOrLoad = buildOrLoad;
+buildOrLoad = async function(){
+  const saved = loadState();
+  if (saved) {
+    U = revive(saved);
+    renderAll();
+    return;
+  }
+  const useStatic = localStorage.getItem("cbbgm_static_csv_mode") === "1";
+  if (useStatic) {
+    const rows = await loadTeamsCSV();
+    const seedInput = document.getElementById("seedInput");
+    U = new Universe(rows, seedInput.value || "static-csv");
+    saveState(U); renderAll();
+  } else {
+    // default behavior
+    return _buildOrLoad();
+  }
+};
+
+document.getElementById("exportTeamsBtn").addEventListener("click", () => {
+  if (!U || !Array.isArray(U.teams) || U.teams.length === 0) {
+    alert("No teams loaded yet. Load from Wikipedia or CSV first.");
+    return;
+  }
+  exportTeamsCSV(U.teams);
+});
